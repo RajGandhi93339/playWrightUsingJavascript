@@ -17,6 +17,8 @@ test('Locators', async ({ page }) => {
     const clicklogin = await page.click("//button[normalize-space()='Log In']")
     await page.waitForTimeout(3000);
 
+    const checkurlpath =await page.url("https://roughauction.testsjit.in/#/home/pages/user/dashboard");
+    await expect(checkurlpath).toBeTruthy();
     await page.close()
-    
+
 })
