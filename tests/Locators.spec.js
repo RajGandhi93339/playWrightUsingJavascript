@@ -4,6 +4,7 @@
 import { test, expect } from '@playwright/test'
 import { format } from 'path'
 
+
 test('Locators', async ({ page }) => {
 
     await page.goto('https://roughauction.testsjit.in/#/login');
