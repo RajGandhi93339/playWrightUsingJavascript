@@ -13,7 +13,7 @@ test('Auto suggest Dropdown', async ({ page }) => {
     const fromCityDropdown = await page.$$("//li[contains(@class,'sc-iwsKbI')]//div//text[1]");
     for (let toOption of fromCityDropdown) {
         const toValue = await toOption.textContent()
-        console.log(toValue);
+        //console.log(toValue);
         if (toValue.includes('Mayur Vihar')) {
             await toOption.click();
             break;
@@ -25,16 +25,34 @@ test('Auto suggest Dropdown', async ({ page }) => {
     const toCityDropdown = await page.$$("//ul//li//div//text[1]");
     for (let fromoption of toCityDropdown) {
         const fromvalue = await fromoption.textContent();
-        console.log(fromvalue)
+        //console.log(fromvalue)
         if (fromvalue.includes('Mulund')) {
             await fromoption.click();
             break;
         }
     }
 
-    await page.getByLabel("Date").click();
-    await page.getByRole('button', { name: ' Date Jan 2025 1 Holiday' }).click();
+    //await page.locator("//span[@class='dateText']").click();
+    await page.waitForSelector("//div[@class='DayTiles__CalendarDaysBlock-sc-1xum02u-0 isgDNj']//span");
+    const dateStore = await page.$$("//div[@class='DayTiles__CalendarDaysBlock-sc-1xum02u-0 isgDNj']//span");
 
+    const currentDate = new Date();
+    const formattedDate = currentDate.getDate();
+    console.log(formattedDate);
+
+    for (let date of dateStore) {
+        const datesValue = await date.textContent();
+        //console.log(datesValue);
+
+        if (datesValue == formattedDate || datesValue >= formattedDate) {
+            await date.click();
+            break;
+        }
+        else {
+            console.log("date not enter", datesValue)
+        }
+
+    }
     await page.waitForTimeout(5000);
 })
 
