@@ -44,12 +44,13 @@ test('Auto suggest Dropdown', async ({ page }) => {
         const datesValue = await date.textContent();
         //console.log(datesValue);
 
-        if (datesValue == formattedDate || datesValue >= formattedDate) {
+        if ( datesValue >= formattedDate ) {
             await date.click();
             break;
         }
         else {
-            console.log("date not enter", datesValue)
+            //console.log("date not enter", datesValue)
+            continue;
         }
 
     }

@@ -31,15 +31,15 @@ test.skip('Confirmation Dialog - Alert ok and cancel', async ({ page }) => {
   await page.waitForTimeout(5000);
 });
 
-test('Prompt Box', async ({ page }) => {
+test('Prompt Box - handle ok button', async ({ page }) => {
   await page.goto("https://testautomationpractice.blogspot.com/");
 
   page.on('dialog', async dialog => {
 
     //enable dialogue window handler 
     expect(dialog.type()).toContain('prompt');
-    expect(dialog.message()).toContain('Please enter your name:');
-    expect(dialog.defaultValue()).toContain('Harry Potter');
+    expect(dialog.message()).toContain('Please enter your name:')
+    expect(dialog.defaultValue()).toContain('Harry Potter')
     await dialog.accept(); // close by using ok button
 
   });
